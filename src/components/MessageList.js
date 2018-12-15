@@ -1,16 +1,11 @@
 import React from 'react';
-import Message from './Message';
 
-const Div = styled.div`
-    border: 1px solid red;
-    margin: 20px;
-`;
+import Message from './Message';
 
 class MessageList extends React.Component {
     render() {
-        console.log(this.props.messages);
         return (
-            <Div>
+            <div>
                 {this.props.messages.map((message) => {
                     return (
                         <Message
@@ -20,7 +15,7 @@ class MessageList extends React.Component {
                             key={message.id}/>
                     )
                 })}
-            </Div>
+            </div>
         )
     }
 }
