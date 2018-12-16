@@ -28,11 +28,13 @@ class SendMessageForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <input 
-                    onChange={this.handleChange}
-                    value={this.state.message}/>
-            </form>
+            <div className="send-message-form">
+                <form onSubmit={this.handleSubmit}>
+                    <input 
+                        onChange={this.handleChange}
+                        value={this.state.message}/>
+                </form>
+            </div>
         )
     }
 }

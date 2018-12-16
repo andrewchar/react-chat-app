@@ -7,7 +7,7 @@ import NewRoomForm from './components/NewRoomForm';
 import RoomList from './components/RoomList';
 import SendMessageForm from './components/SendMessageForm';
 
-import './styles/style.css';
+import './styles/style.scss';
 
 class App extends Component {
 	constructor() {

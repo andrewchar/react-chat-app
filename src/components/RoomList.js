@@ -3,7 +3,7 @@ import React from 'react';
 class RoomList extends React.Component {
     render() {
         return (
-            <div>
+            <div className="room-list">
                 <h3>Channels</h3>
                 <ul>
                     {this.props.rooms.map((room) => {

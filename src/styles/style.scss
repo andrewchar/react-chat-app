@@ -1,0 +1,36 @@
+@import './vendor/normalize.css';
+
+body {
+    height: 100vh;
+}
+
+#root {
+    height: 100%;
+}
+
+.App {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 60px;
+    grid-template-areas:
+        "room chat chat chat chat chat"
+        "addRoom msg msg msg msg msg"
+}
+
+.send-message-form {
+    grid-area: msg;
+
+    form, input {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.room-list {
+    grid-area: room;
+}
+
+.new-room-form {
+    grid-area: addRoom;
+}
