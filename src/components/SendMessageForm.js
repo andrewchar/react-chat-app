@@ -18,21 +18,25 @@ class SendMessageForm extends React.Component {
     }
 
     handleSubmit(e) {
-        e.preventDefault();
-        this.props.sendMessage(this.state.message)
+        if(e.keyCode === 13 && e.shiftKey === false) {
+            e.preventDefault();            
+            this.props.sendMessage(this.state.message)
 
-        this.setState({
-            message: ''
-        })
-    }
+            this.setState({
+                message: ''
+            })
+        }
+      }
 
     render() {
         return (
             <div className="send-message-form">
-                <form onSubmit={this.handleSubmit}>
-                    <input 
+                <form>
+                    <textarea 
                         onChange={this.handleChange}
-                        value={this.state.message}/>
+                        onKeyDown={this.handleSubmit}
+                        value={this.state.message}
+                        disabled={this.props.roomId === null ? true : false}/>
                 </form>
             </div>
         )

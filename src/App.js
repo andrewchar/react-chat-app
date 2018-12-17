@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ChatManager, TokenProvider } from '@pusher/chatkit-client'
 
-import Message from './components/Message';
 import MessageList from './components/MessageList';
 import NewRoomForm from './components/NewRoomForm';
 import RoomList from './components/RoomList';
@@ -102,9 +101,9 @@ class App extends Component {
 				<RoomList
 					subscribeToRoom={this.subscribeToRoom}
 					rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
-				<MessageList messages={this.state.messages}/>
+				<MessageList messages={this.state.messages} roomId={this.state.roomId}/>
 				<NewRoomForm createRoom={this.createRoom}/>
-				<SendMessageForm sendMessage={this.sendMessage}/>
+				<SendMessageForm sendMessage={this.sendMessage} roomId={this.state.roomId}/>
 			</div>
 		);
 	}

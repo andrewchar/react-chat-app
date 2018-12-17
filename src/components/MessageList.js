@@ -4,6 +4,13 @@ import Message from './Message';
 
 class MessageList extends React.Component {
     render() {
+        if (this.props.roomId === null) {
+            return (
+                <div>
+                    <p>&#8592; Select a Channel</p>
+                </div>
+            )
+        }
         return (
             <div>
                 {this.props.messages.map((message) => {
