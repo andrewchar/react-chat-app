@@ -1,8 +1,21 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
 
 import Message from './Message';
 
 class MessageList extends React.Component {
+    componentWillUpdate() {
+        const node = ReactDOM.findDOMNode(this)
+        this.shouldScrollToBottom = node.scrollTop + node.clientHeight + 100 >= node.scrollHeight
+    }
+    
+    componentDidUpdate() {
+        if (this.shouldScrollToBottom) {
+            const node = ReactDOM.findDOMNode(this)
+            node.scrollTop = node.scrollHeight   
+        }
+    }
+
     render() {
         if (this.props.roomId === null) {
             return (
@@ -12,16 +25,18 @@ class MessageList extends React.Component {
             )
         }
         return (
-            <div>
-                {this.props.messages.map((message) => {
-                    return (
-                        <Message
-                            message={message.text}
-                            sender={message.senderId}
-                            time={message.createdAt}
-                            key={message.id}/>
-                    )
-                })}
+            <div className="message-list">
+                    {this.props.messages.map((message) => {
+                        return (
+                            <Message
+                                message={message.text}
+                                sender={message.senderId}
+                                time={message.createdAt}
+                                key={message.id}
+                                createdAt={message.createdAt}
+                                userName={this.props.userName}/>
+                        )
+                    })}
             </div>
         )
     }

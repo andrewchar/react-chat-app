@@ -16,7 +16,9 @@ class App extends Component {
 			roomId: null,
 			messages: [],
 			joinableRooms: [],
-			joinedRooms: []
+			joinedRooms: [],
+			roomName: null,
+			userName: 'andrew'
 		}
 
 		this.sendMessage = this.sendMessage.bind(this);
@@ -28,7 +30,7 @@ class App extends Component {
     componentDidMount() {
 		const chatManager = new ChatManager({
 			instanceLocator: 'v1:us1:fb26ac6a-c4a4-43c6-afb1-3f8a573b1029',
-			userId: 'andrew', // todo: programatically update this
+			userId: this.state.userName, // todo: programatically update this
 			tokenProvider: new TokenProvider({
 				url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/fb26ac6a-c4a4-43c6-afb1-3f8a573b1029/token'
 			})
@@ -68,7 +70,8 @@ class App extends Component {
 		})
 		.then(room => {
 			this.setState({
-				roomId: room.id
+				roomId: room.id,
+				roomName: room.name
 			})
 		})
 		this.getRooms();
@@ -101,9 +104,15 @@ class App extends Component {
 				<RoomList
 					subscribeToRoom={this.subscribeToRoom}
 					rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
-				<MessageList messages={this.state.messages} roomId={this.state.roomId}/>
 				<NewRoomForm createRoom={this.createRoom}/>
-				<SendMessageForm sendMessage={this.sendMessage} roomId={this.state.roomId}/>
+				<MessageList 
+					messages={this.state.messages}
+					roomId={this.state.roomId}
+					userName={this.state.userName}/>
+				<SendMessageForm 
+					sendMessage={this.sendMessage}
+					roomId={this.state.roomId}
+					roomName={this.state.roomName}/>
 			</div>
 		);
 	}

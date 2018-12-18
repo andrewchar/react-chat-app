@@ -18,7 +18,7 @@ class SendMessageForm extends React.Component {
     }
 
     handleSubmit(e) {
-        if(e.keyCode === 13 && e.shiftKey === false) {
+        if(e.keyCode === 13) {
             e.preventDefault();            
             this.props.sendMessage(this.state.message)
 
@@ -29,15 +29,20 @@ class SendMessageForm extends React.Component {
       }
 
     render() {
+        let placeholder = '';
+        if (this.props.roomName !== null) {
+            placeholder = `Message #${this.props.roomName}`;
+        }
+
         return (
             <div className="send-message-form">
-                <form>
-                    <textarea 
-                        onChange={this.handleChange}
-                        onKeyDown={this.handleSubmit}
-                        value={this.state.message}
-                        disabled={this.props.roomId === null ? true : false}/>
-                </form>
+                <textarea 
+                    onChange={this.handleChange}
+                    onKeyDown={this.handleSubmit}
+                    value={this.state.message}
+                    disabled={this.props.roomId === null ? true : false}
+                    placeholder={placeholder}
+                    rows="1"/>
             </div>
         )
     }
