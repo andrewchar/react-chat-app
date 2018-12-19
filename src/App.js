@@ -5,6 +5,8 @@ import MessageList from './components/MessageList';
 import NewRoomForm from './components/NewRoomForm';
 import RoomList from './components/RoomList';
 import SendMessageForm from './components/SendMessageForm';
+import User from './components/User';
+import CurrentRoom from './components/CurrentRoom';
 
 import './styles/style.scss';
 
@@ -101,6 +103,8 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
+				<User userName={this.state.userName}/>
+				<CurrentRoom  roomName={this.state.roomName}/>
 				<RoomList
 					subscribeToRoom={this.subscribeToRoom}
 					rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>

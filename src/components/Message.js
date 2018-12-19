@@ -27,7 +27,7 @@ class Message extends React.Component {
                 <img src={`https://identicon-api.herokuapp.com/${this.props.userName}/50?format=png`} alt="user avatar"/>
                 <div className="message-content">
                     <div className="message-content__sender">
-                        {this.props.sender} <span className="message-content__time">{`${this.time(this.props.createdAt)}`}</span>
+                        {this.props.sender} | {`${this.time(this.props.createdAt)}`}
                     </div>
                     <div className="message-content__message">{this.props.message}</div>
                 </div>
