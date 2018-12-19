@@ -29,7 +29,7 @@ class Message extends React.Component {
                     <div className="message-content__sender">
                         {this.props.sender} <span className="message-content__time">{`${this.time(this.props.createdAt)}`}</span>
                     </div>
-                    <div>{this.props.message}</div>
+                    <div className="message-content__message">{this.props.message}</div>
                 </div>
             </div>
         )
