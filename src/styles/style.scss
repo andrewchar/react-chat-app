@@ -1,12 +1,12 @@
 @import './vendor/normalize.css';
 
 :root {
-    --main-color: #fd9ab6;
-    --secondary-color: #fff4e6;
-    --main-text-color: #11d7d8;
-    --secondary-text-color: pink;
-    --send-message-form: white;
+    --main-color: #006eff;
+    --main-text-color: rgba(0,0,0,0.80);
+    --secondary-text-color: rgba(0,0,0,0.62);
+    --third-text-color: rgba(0,0,0,0.38);
     --border: 1px solid #e0e0e0;
+    --secondary-border: 1px solid #f5f5f5;
 }
 
 * { box-sizing: border-box; }
@@ -38,6 +38,7 @@ html, body {
     grid-area: roomList;
     word-break: break-all;
     border-right: var(--border);
+    color: var(--third-text-color);
 
     ul {
         list-style: none;
@@ -46,20 +47,15 @@ html, body {
 
 
         li {
-            padding: 18px 15px 18px 15px;
-            color: gray;
-                font-weight: bold;
+            padding: 18px 15px 18px 22px;
+            font-weight: bold;
+            border-bottom: var(--secondary-border);
 
             &:hover {
-                background-color: rgb(247, 247, 247);
+                background-color: rgba(0,0,0,0.025);
+                color: var(--secondary-text-color);
                 cursor: pointer;
             }
-
-            // a {
-            //     text-decoration: none;
-            //     color: gray;
-            //     font-weight: bold;
-            // }
         }
     }
 }
@@ -78,7 +74,6 @@ html, body {
         height: 100%;
 
         &:focus {
-            // border: none;
             outline: none;
         }
     }
@@ -112,16 +107,21 @@ html, body {
             background: transparent;
         }
     }
+
+    svg {
+        width: 32px;
+        height: 32px;
+        fill: var(--main-color);
+    }
 }
 
 .message-list__message {
     display: flex;
     padding: 10px 3px 0 3px;
     margin: 10px 0 0 0;
-    // border-top: 1px solid #f4f4f4;
 
     &:not(:first-of-type) {
-        border-top: 1px solid #f5f5f5;
+        border-top: var(--secondary-border);
     }
 
     img {
@@ -138,26 +138,22 @@ html, body {
     
 
     .message-content__sender {
-        color: #c6c6c6;
+        color: var(--third-text-color);
         margin-bottom: 3px;
         font-size: 0.875em;
     }
 
     .message-content__message {
         line-height: 1.6;
+        color: var(--primary-text-color);
     }
 }
-
-// .message-content__time {
-//     font-size: 0.8em;
-//     color: #c6c6c6;
-//     font-weight: 100;
-// }
 
 .user {
     grid-area: user;
     border-bottom: var(--border);
     border-right: var(--border);
+    color: var(--third-text-color);
     display: flex;
     align-items: center;
     padding-left: 15px;
@@ -172,6 +168,7 @@ html, body {
 .current-room {
     grid-area: room;
     border-bottom: var(--border);
+    color: var(--secondary-text-color);
     display: flex;
     align-items: center;
     justify-content: center;
