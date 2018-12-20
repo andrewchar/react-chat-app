@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ReactComponent as SendButton } from '../images/send-button.svg';
+
 class SendMessageForm extends React.Component {
     constructor() {
         super()
@@ -9,6 +11,12 @@ class SendMessageForm extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.sendMessage = this.sendMessage.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.sendMessage();
     }
 
     handleChange(e) {
@@ -19,14 +27,18 @@ class SendMessageForm extends React.Component {
 
     handleSubmit(e) {
         if(e.keyCode === 13) {
-            e.preventDefault();            
-            this.props.sendMessage(this.state.message)
-
-            this.setState({
-                message: ''
-            })
+            e.preventDefault();
+            this.sendMessage();
         }
-      }
+    }
+
+    sendMessage() {
+        this.props.sendMessage(this.state.message)
+
+        this.setState({
+            message: ''
+        })
+    }
 
     render() {
         let placeholder = '';
@@ -43,6 +55,9 @@ class SendMessageForm extends React.Component {
                     disabled={this.props.roomId === null ? true : false}
                     placeholder={placeholder}
                     rows="1"/>
+                <SendButton 
+                    className="send-button"
+                    onClick={this.handleClick}/>
             </div>
         )
     }
