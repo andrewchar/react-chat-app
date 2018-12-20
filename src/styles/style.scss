@@ -2,9 +2,11 @@
 
 :root {
     --main-color: #006eff;
+    --color-white: #fff;
     --main-text-color: rgba(0,0,0,0.80);
     --secondary-text-color: rgba(0,0,0,0.62);
     --third-text-color: rgba(0,0,0,0.38);
+    --darkened-background: rgba(0,0,0,0.025);
     --border: 1px solid #e0e0e0;
     --secondary-border: 1px solid #f5f5f5;
 }
@@ -34,6 +36,38 @@ html, body {
         "addRoom msg msg msg msg msg msg";
 }
 
+.login {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-white);
+    color: var(--third-text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .is-logged-in {
+        display: none;
+    }
+
+    input {
+        padding: 15px;
+        font-size: 1.3em;
+        border: var(--border);
+        background-color: var(--darkened-background);
+        color: var(--main-text-color);
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.hide-login-component {
+    display: none;
+}
+
 .room-list {
     grid-area: roomList;
     word-break: break-all;
@@ -52,7 +86,7 @@ html, body {
             border-bottom: var(--secondary-border);
 
             &:hover {
-                background-color: rgba(0,0,0,0.025);
+                background-color: var(--darkened-background);
                 color: var(--secondary-text-color);
                 cursor: pointer;
             }
@@ -83,6 +117,36 @@ html, body {
     grid-area: chat;
     overflow-y: scroll;
     padding: 25px 0 5px 5px;
+}
+
+.message-list__empty {
+    grid-area: chat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+        margin-bottom: 0;
+        color: var(--third-text-color);
+    }
+
+    p {
+        color: var(--third-text-color);
+    }
+
+    svg {
+        width: 75px;
+        fill: var(--main-color);
+    }
+}
+
+.no-room-selected {
+    grid-area: chat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--third-text-color);
 }
 
 .send-message-form {

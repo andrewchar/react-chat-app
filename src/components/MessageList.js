@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 
+import { ReactComponent as TextMessageImg } from '../images/text-message.svg';
+
 import Message from './Message';
 
 class MessageList extends React.Component {
@@ -19,11 +21,22 @@ class MessageList extends React.Component {
     render() {
         if (this.props.roomId === null) {
             return (
-                <div>
-                    <p>&#8592; Select a Channel</p>
+                <div className="no-room-selected">
+                    <h1>&#8592; Select a Channel</h1>
                 </div>
             )
         }
+
+        if (this.props.messages.length === 0) {
+            return (
+                <div className="message-list__empty">
+                    <TextMessageImg />
+                    <h2>No Messages Yet</h2>
+                    <p>Be the first to post in this room!</p>
+                </div>
+            )
+        }
+
         return (
             <div className="message-list">
                     {this.props.messages.map((message) => {

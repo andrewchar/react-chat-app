@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { ChatManager, TokenProvider } from '@pusher/chatkit-client'
+import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
+import Chatkit from '@pusher/chatkit-server';
 
 import MessageList from './components/MessageList';
 import NewRoomForm from './components/NewRoomForm';
@@ -7,6 +8,7 @@ import RoomList from './components/RoomList';
 import SendMessageForm from './components/SendMessageForm';
 import User from './components/User';
 import CurrentRoom from './components/CurrentRoom';
+import LogIn from './components/LogIn';
 
 import './styles/style.scss';
 
@@ -20,29 +22,60 @@ class App extends Component {
 			joinableRooms: [],
 			joinedRooms: [],
 			roomName: null,
-			userName: 'andrew'
+			userName: '',
+			isLoggedIn: false,
+			chatConnectInit: false
 		}
 
 		this.sendMessage = this.sendMessage.bind(this);
 		this.getRooms = this.getRooms.bind(this);
 		this.subscribeToRoom = this.subscribeToRoom.bind(this);
 		this.createRoom = this.createRoom.bind(this);
+		this.logIn = this.logIn.bind(this);
 	}
 
-    componentDidMount() {
-		const chatManager = new ChatManager({
-			instanceLocator: 'v1:us1:fb26ac6a-c4a4-43c6-afb1-3f8a573b1029',
-			userId: this.state.userName, // todo: programatically update this
-			tokenProvider: new TokenProvider({
-				url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/fb26ac6a-c4a4-43c6-afb1-3f8a573b1029/token'
-			})
-		});
+    componentDidUpdate() {
+		if (!this.state.chatConnectInit) {
+			const chatManager = new ChatManager({
+				instanceLocator: process.env.REACT_APP_INSTANCE_LOCATOR,
+				userId: this.state.userName,
+				tokenProvider: new TokenProvider({
+					url: process.env.REACT_APP_TEST_TOKEN_PROVIDER
+				})
+			});
 
-		chatManager.connect()
-		.then(currentUser => {
-			this.currentUser = currentUser;
-			this.getRooms();
+			chatManager.connect()
+			.then(currentUser => {
+				this.currentUser = currentUser;
+
+				this.setState({
+					chatConnectInit: true
+				})
+
+				this.getRooms();
+			})
+		}
+	}
+
+	logIn(userName) {
+		const chatkit = new Chatkit({
+			instanceLocator: process.env.REACT_APP_INSTANCE_LOCATOR,
+			key: process.env.REACT_APP_SECRET_KEY
 		})
+
+	    chatkit.createUser({
+			id: userName,
+			name: userName,
+	    })
+	  	.then(() => {
+			this.setState({
+				userName,
+				isLoggedIn: true
+			})
+		})
+		.catch((err) => {
+	  		console.log('Error creating user: ' + err);
+	  	});
 	}
 
 	getRooms() {
@@ -63,7 +96,7 @@ class App extends Component {
 		this.currentUser.subscribeToRoom({
 			roomId,
 			hooks: {
-			  onMessage: message => {
+			  onMessage: message => {				  
 				this.setState({
 					messages: [...this.state.messages, message]
 				})
@@ -103,6 +136,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
+				{this.state.isLoggedIn ? null : <LogIn logIn={this.logIn}/>}
 				<User userName={this.state.userName}/>
 				<CurrentRoom  roomName={this.state.roomName}/>
 				<RoomList

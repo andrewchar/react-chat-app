@@ -2,18 +2,14 @@ import React from 'react';
 
 class RoomList extends React.Component {
     render() {
+        const orderedRooms = [...this.props.rooms].sort((a, b) => a.id > b.id)
         return (
             <div className="room-list">
                 <ul>
-                    {this.props.rooms.map((room) => {
+                    {orderedRooms.map((room) => {
                         return (
                             <li key={room.id} onClick={() => this.props.subscribeToRoom(room.id)}>
-                                {/* <a 
-                                    href='#'
-                                    id={room.id}
-                                    onClick={() => this.props.subscribeToRoom(room.id)}> */}
-                                    # {room.name}
-                                {/* </a> */}
+                                # {room.name}
                             </li>  
                         )
                     })}

@@ -34,7 +34,8 @@ class NewRoomList extends React.Component {
                     <input 
                         placeholder='Create a room'
                         value={this.state.roomName}
-                        onChange={this.handleInput}/>
+                        onChange={this.handleInput}
+                        maxLength="20"/>
                 </form>
             </div>
         )

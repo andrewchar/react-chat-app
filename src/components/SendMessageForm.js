@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ReactComponent as SendButton } from '../images/send-button.svg';
+import { ReactComponent as SendButtonImg } from '../images/send-button.svg';
 
 class SendMessageForm extends React.Component {
     constructor() {
@@ -55,7 +55,7 @@ class SendMessageForm extends React.Component {
                     disabled={this.props.roomId === null ? true : false}
                     placeholder={placeholder}
                     rows="1"/>
-                <SendButton 
+                <SendButtonImg 
                     className="send-button"
                     onClick={this.handleClick}/>
             </div>
