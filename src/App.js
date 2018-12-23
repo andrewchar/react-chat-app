@@ -9,6 +9,7 @@ import SendMessageForm from './components/SendMessageForm';
 import User from './components/User';
 import CurrentRoom from './components/CurrentRoom';
 import LogIn from './components/LogIn';
+import TypingIndicator from './components/TypingIndicator';
 
 import './styles/style.scss';
 
@@ -24,7 +25,8 @@ class App extends Component {
 			roomName: null,
 			userName: '',
 			isLoggedIn: false,
-			chatConnectInit: false
+			chatConnectInit: false,
+			userIsTyping: null
 		}
 
 		this.sendMessage = this.sendMessage.bind(this);
@@ -32,6 +34,7 @@ class App extends Component {
 		this.subscribeToRoom = this.subscribeToRoom.bind(this);
 		this.createRoom = this.createRoom.bind(this);
 		this.logIn = this.logIn.bind(this);
+		this.typingIndicator = this.typingIndicator.bind(this);
 	}
 
     componentDidUpdate() {
@@ -96,12 +99,27 @@ class App extends Component {
 		this.currentUser.subscribeToRoom({
 			roomId,
 			hooks: {
-			  onMessage: message => {				  
-				this.setState({
-					messages: [...this.state.messages, message]
-				})
-			  }
-			}
+				onMessage: message => {				  
+					this.setState({
+						messages: [...this.state.messages, message]
+					})
+				},
+				onUserStartedTyping: user => {
+					console.log(`User ${user.name} started typing`);
+
+					this.setState({
+						userIsTyping: user.name						
+					})
+				},
+				onUserStoppedTyping: user => {
+					console.log(`User ${user.name} stopped typing`);
+
+					this.setState({
+						userIsTyping: null					
+					})
+				}
+			},
+			messageLimit: 10
 		})
 		.then(room => {
 			this.setState({
@@ -133,6 +151,17 @@ class App extends Component {
 		})
 	}
 
+	typingIndicator() {
+		this.currentUser.isTypingIn({
+			roomId: this.state.roomId
+		}).then(() => {
+			console.log('Success!')
+		})
+		.catch(err => {
+			console.log(`Error sending typing indicator: ${err}`)
+		})
+	}
+
 	render() {
 		return (
 			<div className="App">
@@ -143,14 +172,18 @@ class App extends Component {
 					subscribeToRoom={this.subscribeToRoom}
 					rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
 				<NewRoomForm createRoom={this.createRoom}/>
-				<MessageList 
-					messages={this.state.messages}
-					roomId={this.state.roomId}
-					userName={this.state.userName}/>
+				<div className="App__sub-grid">
+					<MessageList 
+						messages={this.state.messages}
+						roomId={this.state.roomId}
+						userName={this.state.userName}/>
+					{this.state.roomId === null ? null : <TypingIndicator userIsTyping={this.state.userIsTyping}/>}
+				</div>
 				<SendMessageForm 
 					sendMessage={this.sendMessage}
 					roomId={this.state.roomId}
-					roomName={this.state.roomName}/>
+					roomName={this.state.roomName}
+					typingIndicator={this.typingIndicator}/>
 			</div>
 		);
 	}

@@ -113,10 +113,22 @@ html, body {
     }
 }
 
-.message-list {
+.App__sub-grid {
     grid-area: chat;
     overflow-y: scroll;
+    display: grid;
+    grid-template-rows: 1fr 30px;
+}
+
+.message-list {
     padding: 25px 0 5px 5px;
+}
+
+.typing-indicator {
+    background-color: var(--darkened-background);
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
 }
 
 .message-list__empty {

@@ -23,6 +23,7 @@ class SendMessageForm extends React.Component {
         this.setState({
             message: e.target.value
         })
+        this.props.typingIndicator();
     }
 
     handleSubmit(e) {
