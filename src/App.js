@@ -105,15 +105,11 @@ class App extends Component {
 					})
 				},
 				onUserStartedTyping: user => {
-					console.log(`User ${user.name} started typing`);
-
 					this.setState({
 						userIsTyping: user.name						
 					})
 				},
 				onUserStoppedTyping: user => {
-					console.log(`User ${user.name} stopped typing`);
-
 					this.setState({
 						userIsTyping: null					
 					})
@@ -154,8 +150,6 @@ class App extends Component {
 	typingIndicator() {
 		this.currentUser.isTypingIn({
 			roomId: this.state.roomId
-		}).then(() => {
-			console.log('Success!')
 		})
 		.catch(err => {
 			console.log(`Error sending typing indicator: ${err}`)
