@@ -157,9 +157,14 @@ class App extends Component {
 	}
 
 	render() {
+		// login screen
+		if (!this.state.isLoggedIn) {
+			return <LogIn logIn={this.logIn}/>
+		}
+
 		return (
 			<div className="App">
-				{this.state.isLoggedIn ? null : <LogIn logIn={this.logIn}/>}
+				{/* {this.state.isLoggedIn ? null : <LogIn logIn={this.logIn}/>} */}
 				<User userName={this.state.userName}/>
 				<CurrentRoom roomName={this.state.roomName}/>
 				<RoomList
