@@ -21,18 +21,24 @@ class MessageList extends React.Component {
     render() {
         if (this.props.roomId === null) {
             return (
-                <div className="no-room-selected">
-                    <h1>&#8592; Select a Channel</h1>
+                <div className="message-list flex-center">
+                    <div className="no-room-selected">
+                        <h1>&#8592; Select a Channel</h1>
+                    </div>
+                    <div></div>
                 </div>
             )
         }
 
         if (this.props.messages.length === 0) {
             return (
-                <div className="message-list__empty">
-                    <TextMessageImg />
-                    <h2>No Messages Yet</h2>
-                    <p>Be the first to post in this room!</p>
+                <div className="message-list flex-center">
+                    <div className="message-list__empty">
+                        <TextMessageImg />
+                        <h2>No Messages Yet</h2>
+                        <p>Be the first to post in this room!</p>
+                    </div>
+                    <div></div>
                 </div>
             )
         }

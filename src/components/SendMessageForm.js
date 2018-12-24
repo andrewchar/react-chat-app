@@ -42,25 +42,23 @@ class SendMessageForm extends React.Component {
     }
 
     render() {
-        let placeholder = '';
         if (this.props.roomName !== null) {
-            placeholder = `Message #${this.props.roomName}`;
+            return (
+                <div className="send-message-form">
+                    <textarea 
+                        onChange={this.handleChange}
+                        onKeyDown={this.handleSubmit}
+                        value={this.state.message}
+                        disabled={this.props.roomId === null ? true : false}
+                        placeholder={`Message #${this.props.roomName}`}
+                        rows="1"/>
+                    <SendButtonImg 
+                        className="send-button"
+                        onClick={this.handleClick}/>
+                </div>
+            )
         }
-
-        return (
-            <div className="send-message-form">
-                <textarea 
-                    onChange={this.handleChange}
-                    onKeyDown={this.handleSubmit}
-                    value={this.state.message}
-                    disabled={this.props.roomId === null ? true : false}
-                    placeholder={placeholder}
-                    rows="1"/>
-                <SendButtonImg 
-                    className="send-button"
-                    onClick={this.handleClick}/>
-            </div>
-        )
+        return <div className="send-message-form"></div>;
     }
 }
 

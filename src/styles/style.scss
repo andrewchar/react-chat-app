@@ -28,7 +28,7 @@ html, body {
 .App {
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr repeat(6, 1fr);
+    grid-template-columns: minmax(250px, 1fr) repeat(6, 1fr);
     grid-template-rows: 80px 1fr 60px;
     grid-template-areas:
         "user room room room room room room"
@@ -73,6 +73,7 @@ html, body {
     word-break: break-all;
     border-right: var(--border);
     color: var(--third-text-color);
+    overflow-y: auto;
 
     ul {
         list-style: none;
@@ -115,13 +116,19 @@ html, body {
 
 .App__sub-grid {
     grid-area: chat;
-    overflow-y: scroll;
+    overflow-y: auto;
     display: grid;
     grid-template-rows: 1fr 30px;
 }
 
 .message-list {
     padding: 25px 0 5px 5px;
+
+    &.flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .typing-indicator {
@@ -248,7 +255,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 15px;
+    padding: 0 15px;
     font-size: 2em;
     font-weight: bold;
 }

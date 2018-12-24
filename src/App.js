@@ -106,7 +106,7 @@ class App extends Component {
 				},
 				onUserStartedTyping: user => {
 					this.setState({
-						userIsTyping: user.name						
+						userIsTyping: user.name
 					})
 				},
 				onUserStoppedTyping: user => {
@@ -115,7 +115,7 @@ class App extends Component {
 					})
 				}
 			},
-			messageLimit: 10
+			messageLimit: 5
 		})
 		.then(room => {
 			this.setState({
@@ -161,7 +161,7 @@ class App extends Component {
 			<div className="App">
 				{this.state.isLoggedIn ? null : <LogIn logIn={this.logIn}/>}
 				<User userName={this.state.userName}/>
-				<CurrentRoom  roomName={this.state.roomName}/>
+				<CurrentRoom roomName={this.state.roomName}/>
 				<RoomList
 					subscribeToRoom={this.subscribeToRoom}
 					rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
