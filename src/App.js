@@ -38,6 +38,11 @@ class App extends Component {
 		this.logIn = this.logIn.bind(this);
 		this.typingIndicator = this.typingIndicator.bind(this);
 		this.scrollToEnd = this.scrollToEnd.bind(this);
+		this.checkCachedUsername = this.checkCachedUsername.bind(this);
+	}
+
+	componentDidMount() {
+		this.checkCachedUsername();
 	}
 
     componentDidUpdate() {
@@ -164,7 +169,20 @@ class App extends Component {
 	scrollToEnd() {
 		const node = this.myRef.current;
 
-        node.scrollTop = node.scrollHeight;
+		if (node) {
+			node.scrollTop = node.scrollHeight;
+		}
+	}
+
+	checkCachedUsername() {
+		const cachedUsername = localStorage.getItem('userName');
+
+		if (cachedUsername) {
+			this.setState({
+				userName: cachedUsername.toString(),
+				isLoggedIn: true
+			})
+		}
 	}
 	
 	render() {

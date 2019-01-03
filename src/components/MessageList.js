@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
 
 import { ReactComponent as TextMessageImg } from '../images/text-message.svg';
 

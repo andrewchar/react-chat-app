@@ -9,6 +9,7 @@ class LogIn extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.cacheUsername = this.cacheUsername.bind(this);
     }
 
     handleChange(e) {
@@ -20,7 +21,12 @@ class LogIn extends React.Component {
     handleSubmit(e) {
         if (e.keyCode === 13) {
             this.props.logIn(this.state.userName);
+            this.cacheUsername(this.state.userName)
         }
+    }
+
+    cacheUsername(userName) {
+        localStorage.setItem('userName', userName);
     }
 
     render() {
