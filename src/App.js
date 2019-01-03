@@ -175,11 +175,11 @@ class App extends Component {
 	}
 
 	checkCachedUsername() {
-		const cachedUsername = localStorage.getItem('userName');
+		const userName = localStorage.getItem('userName');
 
-		if (cachedUsername) {
+		if (userName) {
 			this.setState({
-				userName: cachedUsername.toString(),
+				userName,
 				isLoggedIn: true
 			})
 		}
