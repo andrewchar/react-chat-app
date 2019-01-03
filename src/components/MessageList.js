@@ -6,29 +6,6 @@ import { ReactComponent as TextMessageImg } from '../images/text-message.svg';
 import Message from './Message';
 
 class MessageList extends React.Component {
-    constructor() {
-        super()
-        // this.myRef = React.createRef();
-    }
-    // componentWillUpdate() {
-    //     const node = ReactDOM.findDOMNode(this)
-    //     this.shouldScrollToBottom = node.scrollTop + node.clientHeight + 100 >= node.scrollHeight
-    // }
-    
-    // componentDidUpdate() {
-    //     const node = this.myRef.current;
-    //     if (node) {
-    //         this.shouldScrollToBottom = node.scrollTop + node.clientHeight + 100 >= node.scrollHeight
-    //         console.log(node, this.shouldScrollToBottom);
-    //         if (this.shouldScrollToBottom) {
-    //             // const node = ReactDOM.findDOMNode(this)
-    //             node.scrollTop = node.scrollHeight;
-    //             console.log(node.scrollTop, node.scrollHeight)
-    //         }
-    //     }
-        
-    // }
-
     render() {
         if (this.props.roomId === null) {
             return (
