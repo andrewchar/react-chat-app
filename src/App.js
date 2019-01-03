@@ -29,12 +29,15 @@ class App extends Component {
 			userIsTyping: null
 		}
 
+		this.myRef = React.createRef();
+
 		this.sendMessage = this.sendMessage.bind(this);
 		this.getRooms = this.getRooms.bind(this);
 		this.subscribeToRoom = this.subscribeToRoom.bind(this);
 		this.createRoom = this.createRoom.bind(this);
 		this.logIn = this.logIn.bind(this);
 		this.typingIndicator = this.typingIndicator.bind(this);
+		this.scrollToEnd = this.scrollToEnd.bind(this);
 	}
 
     componentDidUpdate() {
@@ -58,6 +61,8 @@ class App extends Component {
 				this.getRooms();
 			})
 		}
+
+		this.scrollToEnd();
 	}
 
 	logIn(userName) {
@@ -156,6 +161,12 @@ class App extends Component {
 		})
 	}
 
+	scrollToEnd() {
+		const node = this.myRef.current;
+
+        node.scrollTop = node.scrollHeight;
+	}
+	
 	render() {
 		// login screen
 		if (!this.state.isLoggedIn) {
@@ -164,14 +175,13 @@ class App extends Component {
 
 		return (
 			<div className="App">
-				{/* {this.state.isLoggedIn ? null : <LogIn logIn={this.logIn}/>} */}
 				<User userName={this.state.userName}/>
 				<CurrentRoom roomName={this.state.roomName}/>
 				<RoomList
 					subscribeToRoom={this.subscribeToRoom}
 					rooms={[...this.state.joinableRooms, ...this.state.joinedRooms]}/>
 				<NewRoomForm createRoom={this.createRoom}/>
-				<div className="App__sub-grid">
+				<div className="App__sub-grid" ref={this.myRef}>
 					<MessageList 
 						messages={this.state.messages}
 						roomId={this.state.roomId}
