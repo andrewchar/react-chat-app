@@ -12,19 +12,19 @@ self.__precacheManifest = [
     "url": "/react-chat-app/static/js/runtime~main.e2a21992.js"
   },
   {
-    "revision": "8714bb907f882fef6a30",
-    "url": "/react-chat-app/static/js/main.8714bb90.chunk.js"
+    "revision": "7b897595eeb0ad3492a0",
+    "url": "/react-chat-app/static/js/main.7b897595.chunk.js"
   },
   {
-    "revision": "ff3a6e5a78784cf60b25",
-    "url": "/react-chat-app/static/js/1.ff3a6e5a.chunk.js"
+    "revision": "b6c886df52b88643afd7",
+    "url": "/react-chat-app/static/js/1.b6c886df.chunk.js"
   },
   {
-    "revision": "8714bb907f882fef6a30",
-    "url": "/react-chat-app/static/css/main.3380a557.chunk.css"
+    "revision": "7b897595eeb0ad3492a0",
+    "url": "/react-chat-app/static/css/main.0a012e4f.chunk.css"
   },
   {
-    "revision": "69432aceaf72ef9766ebaa993df3501f",
+    "revision": "e4a5342de4f2d847ceabb1ec874b96a8",
     "url": "/react-chat-app/index.html"
   }
 ];

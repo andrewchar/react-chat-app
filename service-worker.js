@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/react-chat-app/precache-manifest.2636eedfc9d8d2f83ef6121f13026f53.js"
+  "/react-chat-app/precache-manifest.3a592bc84c8030d62a21a412339f436b.js"
 );
 
 workbox.clientsClaim();
